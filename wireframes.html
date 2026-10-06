@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TAS Wireframes &amp; Flow</title>
+  <meta name="description" content="Wireframes, layout flow and user journeys for the TAS Group concept site.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #F2EEE4; --ink: #0B1F33; --ink-2: #46596B; --line: rgba(11,31,51,.14);
+      --bp: #0E3557; --bp-line: rgba(220,236,255,.55); --bp-faint: rgba(220,236,255,.16); --bp-text: #DCEBFF;
+      --orange: #FF5A1F; --accent: #B93A0A;
+      --f-d: 'Big Shoulders Display', Impact, sans-serif; --f-b: 'IBM Plex Sans', system-ui, sans-serif; --f-m: 'JetBrains Mono', monospace;
+    }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper: #0D1A27; --ink: #EAE5D9; --ink-2: #A3B1BE; --line: rgba(234,229,217,.14); --accent: #FF7A45; } }
+    :root[data-theme="dark"] { --paper: #0D1A27; --ink: #EAE5D9; --ink-2: #A3B1BE; --line: rgba(234,229,217,.14); --accent: #FF7A45; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.6 var(--f-b);
+      background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 64px 64px; background-attachment: fixed; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px 96px; }
+    @media (min-width: 700px) { .wrap { padding: 0 32px 120px; } }
+    header { padding: 48px 0 32px; border-bottom: 2px solid var(--ink); margin-bottom: 48px; }
+    .back { font-family: var(--f-m); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); text-decoration: none; }
+    .back:hover { text-decoration: underline; }
+    h1 { font: 900 clamp(48px, 8vw, 96px)/.9 var(--f-d); text-transform: uppercase; margin: 18px 0 14px; }
+    h2 { font: 800 clamp(30px, 4vw, 44px)/1 var(--f-d); text-transform: uppercase; margin: 0 0 8px; }
+    h3 { font: 800 22px/1.1 var(--f-d); text-transform: uppercase; margin: 0 0 6px; letter-spacing: .02em; }
+    .lede { max-width: 640px; color: var(--ink-2); font-size: 18px; margin: 0; }
+    .label { font-family: var(--f-m); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+    section { margin-bottom: 72px; }
+    .sub { color: var(--ink-2); margin: 0 0 24px; max-width: 680px; }
+
+    /* Flow */
+    .flow { display: grid; gap: 0; counter-reset: f; }
+    .flow li { list-style: none; display: grid; grid-template-columns: 56px 180px 1fr; gap: 16px; align-items: baseline; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+    .flow { padding: 0; margin: 0; }
+    .flow b { font: 800 24px/1 var(--f-d); text-transform: uppercase; }
+    .flow .n { font-family: var(--f-m); font-size: 12px; color: var(--accent); }
+    .flow span:last-child { color: var(--ink-2); font-size: 15px; }
+    @media (max-width: 640px) { .flow li { grid-template-columns: 40px 1fr; } .flow span:last-child { grid-column: 2; } }
+
+    /* Journeys */
+    .journeys { display: grid; gap: 16px; }
+    .journey { border: 1.5px solid var(--ink); padding: 18px; background: color-mix(in srgb, var(--paper) 85%, transparent); }
+    .journey p { margin: 0 0 12px; color: var(--ink-2); font-size: 15px; }
+    .steps { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 0; margin: 0; }
+    .steps li { list-style: none; font-family: var(--f-m); font-size: 12px; padding: 6px 10px; border: 1px solid var(--ink); }
+    .steps li.goal { background: var(--orange); border-color: var(--orange); color: #07131F; font-weight: 500; }
+    .steps li.arr { border: 0; padding: 0; color: var(--accent); }
+
+    /* Blueprint wireframes */
+    .boards { display: grid; grid-template-columns: 1fr 300px; gap: 28px; align-items: start; }
+    @media (max-width: 900px) { .boards { grid-template-columns: 1fr; } .board--m { max-width: 340px; } }
+    .board { background: var(--bp); color: var(--bp-text); padding: 14px; border-radius: 4px;
+      background-image: linear-gradient(var(--bp-faint) 1px, transparent 1px), linear-gradient(90deg, var(--bp-faint) 1px, transparent 1px); background-size: 16px 16px; }
+    .board__t { font-family: var(--f-m); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; display: flex; justify-content: space-between; margin-bottom: 12px; opacity: .85; }
+    .wf { border: 1.5px solid var(--bp-line); padding: 12px; margin-bottom: 10px; position: relative; }
+    .wf__tag { position: absolute; top: -9px; left: 10px; background: var(--bp); padding: 0 6px; font-family: var(--f-m); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #FFB08F; }
+    .row { display: flex; gap: 10px; align-items: stretch; }
+    .col { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+    .ln { height: 6px; background: var(--bp-line); opacity: .7; border-radius: 1px; }
+    .ln--h { height: 16px; opacity: 1; }
+    .ln--h2 { height: 11px; opacity: .9; }
+    .ln--s { width: 60%; } .ln--xs { width: 35%; } .ln--m { width: 80%; }
+    .img { flex: 1; min-height: 60px; border: 1.5px solid var(--bp-line);
+      background: linear-gradient(to top right, transparent calc(50% - 1px), var(--bp-line) 50%, transparent calc(50% + 1px)), linear-gradient(to top left, transparent calc(50% - 1px), var(--bp-line) 50%, transparent calc(50% + 1px)); display: grid; place-items: center; }
+    .img span { font-family: var(--f-m); font-size: 10px; background: var(--bp); padding: 2px 6px; letter-spacing: .08em; text-transform: uppercase; }
+    .btnw { height: 22px; width: 96px; border: 1.5px solid var(--bp-line); border-radius: 2px; }
+    .btnw--p { background: rgba(255,90,31,.55); border-color: #FF8A5B; }
+    .chips { display: flex; gap: 5px; flex-wrap: wrap; }
+    .chips i { display: block; height: 14px; width: 40px; border: 1px solid var(--bp-line); border-radius: 8px; }
+    .box4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+    .box4 > div { aspect-ratio: 1 / 1.08; border: 1.5px solid var(--bp-line); background: repeating-linear-gradient(90deg, var(--bp-faint) 0 2px, transparent 2px 7px); }
+    .tabs3 { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1.5px solid var(--bp-line); }
+    .tabs3 div { height: 22px; border-right: 1px dashed var(--bp-faint); }
+    .tabs3 div:first-child { border-bottom: 3px solid #FF8A5B; }
+    .ann { font-family: var(--f-m); font-size: 10px; color: #FFB08F; margin-top: 8px; line-height: 1.5; }
+    .board--m .box4 { grid-template-columns: 1fr 1fr; }
+    .board--m .row { flex-direction: column; }
+    .board--m .img { min-height: 70px; }
+
+    /* Notes */
+    .notes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .note { border-top: 3px solid var(--ink); padding-top: 14px; }
+    .note p, .note li { color: var(--ink-2); font-size: 15px; }
+    .note ul { padding-left: 18px; margin: 0; }
+    footer { font-family: var(--f-m); font-size: 12px; color: var(--ink-2); border-top: 1px solid var(--line); padding-top: 18px; }
+    a { color: inherit; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="back" href="index.html">← Back to the site</a>
+    <h1>Wireframes &amp; layout flow</h1>
+    <p class="lede">The page structure, the three user journeys it is built around, and blueprint-style wireframes for desktop and mobile. Read top to bottom; the page reads the same way.</p>
+  </header>
+
+  <section>
+    <p class="label">A / Page flow</p>
+    <h2>One long voyage, eight stops</h2>
+    <p class="sub">A single scrolling page. Every section answers one buyer question, in the order a freight or ship-agency buyer asks them.</p>
+    <ol class="flow">
+      <li><span class="n">00</span><b>Hero</b><span>Who are you and where do you reach? Live route map from Penang, two CTAs (estimate, network).</span></li>
+      <li><span class="n">01</span><b>Who we are</b><span>Why trust you? The "we board ships" positioning plus four proof counters.</span></li>
+      <li><span class="n">02</span><b>Services</b><span>What can you move? Ocean / Air / Land explorer with mode profile meters and door-to-door chain.</span></li>
+      <li><span class="n">03</span><b>Port agency</b><span>What does an agent actually do? Scroll-driven port call in six stages.</span></li>
+      <li><span class="n">04</span><b>The Group</b><span>Who will I deal with? Four companies as four containers with opening doors.</span></li>
+      <li><span class="n">05</span><b>Network</b><span>Do you go where I go? Interactive lane map by mode, with transit time and distance.</span></li>
+      <li><span class="n">06</span><b>Instant estimate</b><span>What will it cost? Four-step calculator ending in a firm-quote request.</span></li>
+      <li><span class="n">07</span><b>Heritage</b><span>Will you be around? 1978 to today as a draggable horizon line.</span></li>
+      <li><span class="n">08</span><b>CTA + footer</b><span>How do I start? Quote or appoint-as-agent, signal-flag sign-off.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="label">B / User journeys</p>
+    <h2>Three buyers, three paths</h2>
+    <p class="sub">Each journey ends at a conversion point. Shortcuts between sections (e.g. "Price this lane" on the map) remove steps for buyers who already know what they need.</p>
+    <div class="journeys">
+      <div class="journey">
+        <h3>Shipper / importer · logistics manager</h3>
+        <p>Needs a price and a transit time for a lane, today.</p>
+        <ol class="steps"><li>Hero</li><li class="arr">→</li><li>Network: pick lane</li><li class="arr">→</li><li>"Price this lane"</li><li class="arr">→</li><li>Cargo step</li><li class="arr">→</li><li>Estimate</li><li class="arr">→</li><li class="goal">Request firm quote</li></ol>
+      </div>
+      <div class="journey">
+        <h3>Ship owner / operator · port captain</h3>
+        <p>Choosing an agent for a call at Penang. Wants proof of competence.</p>
+        <ol class="steps"><li>Hero</li><li class="arr">→</li><li>Port agency story</li><li class="arr">→</li><li>Stage 06 · Sailing</li><li class="arr">→</li><li class="goal">Appoint TAS at Penang</li></ol>
+      </div>
+      <div class="journey">
+        <h3>Partner, investor or recruit</h3>
+        <p>Assessing the group's scale and longevity.</p>
+        <ol class="steps"><li>Who we are</li><li class="arr">→</li><li>The Group containers</li><li class="arr">→</li><li>Heritage timeline</li><li class="arr">→</li><li class="goal">Talk to the desk</li></ol>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">C / Wireframes</p>
+    <h2>Desktop &amp; mobile</h2>
+    <p class="sub">Low-fidelity blueprints. Orange marks primary actions; crossed boxes are illustrations or live visuals.</p>
+    <div class="boards">
+      <div class="board">
+        <div class="board__t"><span>Desktop · 1440</span><span>Scale 1:6</span></div>
+        <div class="wf"><span class="wf__tag">Nav</span><div class="row"><div class="ln ln--xs"></div><div style="flex:1"></div><div class="chips"><i></i><i></i><i></i><i></i><i></i></div><div class="btnw btnw--p" style="width:70px"></div></div></div>
+        <div class="wf"><span class="wf__tag">00 Hero</span><div class="row">
+          <div class="col"><div class="ln ln--xs"></div><div class="ln ln--h"></div><div class="ln ln--h"></div><div class="ln ln--h ln--s"></div><div class="ln ln--m"></div><div class="ln ln--s"></div><div class="row"><div class="btnw btnw--p"></div><div class="btnw"></div></div></div>
+          <div class="img" style="min-height:150px"><span>Dot map + animated lanes</span></div></div>
+          <div class="ln" style="margin-top:10px;opacity:.4"></div><p class="ann">Ticker: every lane + transit days scrolls along the bottom edge.</p></div>
+        <div class="wf"><span class="wf__tag">01 Who we are</span><div class="row"><div class="col"><div class="ln ln--h"></div><div class="ln ln--h ln--m"></div></div><div class="col"><div class="ln"></div><div class="ln"></div><div class="ln ln--s"></div></div></div>
+          <div class="row" style="margin-top:12px"><div class="col"><div class="ln ln--h ln--xs"></div><div class="ln ln--s"></div></div><div class="col"><div class="ln ln--h ln--xs"></div><div class="ln ln--s"></div></div><div class="col"><div class="ln ln--h ln--xs"></div><div class="ln ln--s"></div></div><div class="col"><div class="ln ln--h ln--xs"></div><div class="ln ln--s"></div></div></div></div>
+        <div class="wf"><span class="wf__tag">02 Services explorer</span><div class="tabs3"><div></div><div></div><div></div></div>
+          <div class="row" style="margin-top:10px"><div class="img" style="min-height:110px"><span>Mode illustration</span></div><div class="col"><div class="ln ln--h2 ln--s"></div><div class="ln"></div><div class="ln ln--m"></div><div class="ln ln--s"></div><div class="ln ln--xs"></div></div></div>
+          <p class="ann">Chain: pickup → haulage → port → main leg → port → customs → delivery</p></div>
+        <div class="wf"><span class="wf__tag">03 Port agency · sticky</span><div class="row"><div class="img" style="flex:1.5;min-height:110px"><span>Port scene · ship moves on scroll</span></div><div class="col"><div class="ln ln--h ln--xs"></div><div class="ln ln--h2 ln--s"></div><div class="ln"></div><div class="ln ln--m"></div><div class="chips"><i></i><i></i><i></i></div></div></div><p class="ann">Pinned for ~5 screens. Scroll progress → stage 01–06.</p></div>
+        <div class="wf"><span class="wf__tag">04 Group</span><div class="box4"><div></div><div></div><div></div><div></div></div><p class="ann">Hover / tap opens the doors → company summary inside.</p></div>
+        <div class="wf"><span class="wf__tag">05 Network</span><div class="row"><div class="col" style="flex:2"><div class="chips"><i></i><i></i><i></i></div><div class="img" style="min-height:130px"><span>Lane map · zooms for land</span></div></div><div class="col"><div class="ln ln--xs"></div><div class="ln ln--h"></div><div class="ln ln--h ln--s"></div><div class="ln"></div><div class="ln"></div><div class="btnw btnw--p" style="width:100%"></div></div></div>
+          <div class="chips" style="margin-top:8px"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="wf"><span class="wf__tag">06 Estimate</span><div class="row"><div class="col" style="flex:.3"><div class="ln ln--h2"></div><div class="ln ln--h2"></div><div class="ln ln--h2"></div><div class="ln ln--h2"></div></div><div class="col"><div class="ln ln--h ln--s"></div><div class="row"><div class="img" style="min-height:44px"></div><div class="img" style="min-height:44px"></div><div class="img" style="min-height:44px"></div></div><div class="ln"></div><div class="row"><div class="btnw"></div><div style="flex:1"></div><div class="btnw btnw--p"></div></div></div></div><p class="ann">Mode → Route → Cargo (live visual) → Estimate + CO₂ → firm quote.</p></div>
+        <div class="wf"><span class="wf__tag">07 Heritage</span><div class="ln" style="margin-bottom:8px"></div><div class="row"><div class="col"><div class="ln ln--h ln--s"></div><div class="ln"></div></div><div class="col"><div class="ln ln--h ln--s"></div><div class="ln"></div></div><div class="col"><div class="ln ln--h ln--s"></div><div class="ln"></div></div><div class="col" style="opacity:.4"><div class="ln ln--h ln--s"></div><div class="ln"></div></div></div></div>
+        <div class="wf"><span class="wf__tag">CTA + footer</span><div class="row"><div class="col"><div class="ln ln--h ln--m"></div></div><div class="btnw btnw--p"></div><div class="btnw"></div></div></div>
+      </div>
+
+      <div class="board board--m">
+        <div class="board__t"><span>Mobile · 375</span><span>1:3</span></div>
+        <div class="wf"><span class="wf__tag">Nav</span><div class="row" style="flex-direction:row"><div class="ln ln--s"></div><div style="flex:1"></div><div class="btnw" style="width:22px;border-radius:50%"></div></div></div>
+        <div class="wf"><span class="wf__tag">Hero</span><div class="img" style="min-height:70px"><span>Map behind</span></div><div class="col" style="margin-top:8px"><div class="ln ln--h"></div><div class="ln ln--h ln--m"></div><div class="ln"></div><div class="btnw btnw--p" style="width:100%"></div><div class="btnw" style="width:100%"></div></div></div>
+        <div class="wf"><span class="wf__tag">Stats 2×2</span><div class="box4" style="grid-template-columns:1fr 1fr"><div style="aspect-ratio:2/1"></div><div style="aspect-ratio:2/1"></div><div style="aspect-ratio:2/1"></div><div style="aspect-ratio:2/1"></div></div></div>
+        <div class="wf"><span class="wf__tag">Explorer</span><div class="tabs3"><div></div><div></div><div></div></div><div class="img" style="margin-top:8px"><span>Illustration</span></div><div class="col" style="margin-top:8px"><div class="ln"></div><div class="ln ln--s"></div></div><p class="ann">Chain scrolls sideways.</p></div>
+        <div class="wf"><span class="wf__tag">Port agency</span><div class="img"><span>Scene on top</span></div><div class="col" style="margin-top:8px"><div class="ln ln--h2 ln--s"></div><div class="ln"></div><div class="ln ln--m"></div></div><p class="ann">Scene + text share one pinned screen.</p></div>
+        <div class="wf"><span class="wf__tag">Group</span><div class="box4"><div></div><div></div></div><p class="ann">Tap a container to open it.</p></div>
+        <div class="wf"><span class="wf__tag">Network</span><div class="chips"><i></i><i></i><i></i><i></i></div><div class="img" style="margin-top:6px"><span>Map</span></div><div class="col" style="margin-top:6px"><div class="ln ln--h ln--s"></div><div class="btnw btnw--p" style="width:100%"></div></div><p class="ann">Port chips scroll above the map.</p></div>
+        <div class="wf"><span class="wf__tag">Estimate</span><div class="row" style="flex-direction:row"><div class="ln"></div><div class="ln"></div><div class="ln"></div><div class="ln"></div></div><div class="col" style="margin-top:8px"><div class="ln ln--h2"></div><div class="btnw" style="width:100%;height:30px"></div><div class="btnw" style="width:100%;height:30px"></div><div class="btnw btnw--p" style="width:100%"></div></div><p class="ann">Rail turns horizontal; cards stack.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="label">D / Interaction notes</p>
+    <h2>States worth designing</h2>
+    <div class="notes">
+      <div class="note"><h3>Lane map</h3><ul><li>Idle: all lanes faint, hub radar pulse</li><li>Hover / focus: tooltip + lane brightens</li><li>Selected: lane draws in orange, marker sails it, panel fills</li><li>Land mode: viewBox zooms to the peninsula with a finer coastline</li></ul></div>
+      <div class="note"><h3>Calculator</h3><ul><li>Mode cards drive destination list and cargo fields</li><li>Live visual per mode: container fill, chargeable-weight bars, trailer pallet slots</li><li>Invalid fields flagged inline; Enter advances</li><li>Result hands a summary into the enquiry form</li></ul></div>
+      <div class="note"><h3>Port-call story</h3><ul><li>Scroll progress maps to ship position</li><li>Stage 3: cranes work, boxes lift off and reload</li><li>Stage 5: "Cleared" stamp lands</li><li>Reversible: scrolling up replays it backwards</li></ul></div>
+      <div class="note"><h3>Accessibility</h3><ul><li>Real tabs and radio groups with arrow-key support</li><li>Every map port is also a button in a list</li><li>Reduced-motion users get the static end state</li><li>Light "chart paper" and dark "night watch" themes</li></ul></div>
+    </div>
+  </section>
+
+  <footer>Concept work for a design challenge · Not an official TAS Group document · <a href="index.html">View the live site</a></footer>
+</div>
+</body>
+</html>
